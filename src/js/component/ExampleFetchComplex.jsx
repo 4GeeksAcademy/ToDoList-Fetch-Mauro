@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 export const ExampleFetchComplex = () => {
-    const [character, setCharacter] = useState([])
-    const base_url = 'https://swapi.tech/api';
+    const host = 'https://playground.4geeks.com/todo';
+    const user = 'mauro'
 
-    const getCharacter = async () => {
-        const uri = `${base_url}/people`;
+    const [character, setCharacter] = useState(["",""]);
+
+    const getUser = async () => {
+        const uri = `${host}/users/${user}`;
         const options = {
             method: 'GET'
         };
@@ -20,13 +22,13 @@ export const ExampleFetchComplex = () => {
         const data = await response.json();
         console.log(data);
 
-        setCharacter(data.results)
+        setCharacter(data.todos)
     };
 
 
 
     useEffect(() => {
-        getCharacter()
+        getUser('mauro')
     }, [])
 
     return (
@@ -36,7 +38,7 @@ export const ExampleFetchComplex = () => {
             
             
             <ul className="list-group">
-                {character.map((iterator) => <li key={iterator.uid} className="list-group-item">{iterator.name}</li>)}
+                {character.map((item) => <li  className="list-group-item">{item.label}</li>)}
             </ul>
         </div>
 
